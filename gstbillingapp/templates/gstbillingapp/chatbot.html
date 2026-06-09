@@ -1,0 +1,313 @@
+{% extends "gstbillingapp/base.html" %}
+
+{% load static %}
+
+
+{% block content %}
+<style>
+	body {
+		font-family: Arial, sans-serif;
+		background: #f3f3f3;
+		margin: 0;
+		padding: 0;
+	}
+
+	/* Chat container */
+	.chat-container {
+		width: 450px;
+		height: 84vh;
+		margin: 30px auto;
+		background: rgba(255, 255, 255, 0.5);
+		backdrop-filter: blur(10px);
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+	}
+
+	/* Header */
+	.header {
+		background: var(--primary);
+		color: white;
+		padding: 12px 16px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.header button {
+		background: white;
+		border: none;
+		padding: 6px 12px;
+		color: var(--primary);
+		border-radius: 6px;
+		cursor: pointer;
+		font-size: 14px;
+	}
+
+	/* Chat messages */
+	.messages {
+		flex: 1;
+		overflow-y: auto;
+		padding: 15px;
+	}
+
+	.msg {
+		max-width: 75%;
+		padding: 10px 14px;
+		margin: 8px 0;
+		font-size: 14px;
+		white-space: pre-line;
+	}
+
+	.bot {
+		background: #ffffff;
+		color: #333;
+		align-self: flex-start;
+		border-radius: 12px 12px 12px 0;
+	}
+
+	.user {
+		background: var(--primary);
+		color: #ffffff;
+		align-self: flex-end;
+		border-radius: 12px 12px 0 12px;
+		margin-left: 150px;
+	}
+
+	/* Input area */
+	.input-area {
+		display: flex;
+		padding: 10px;
+		background: white;
+		border-top: 1px solid #ddd;
+	}
+
+	.input-area input {
+		flex: 1;
+		padding: 10px;
+		border: 1px solid gray;
+		border-radius: 8px;
+		outline: none;
+		font-size: 14px;
+	}
+
+	.input-area button {
+		background: var(--primary);
+		color: white;
+		border: none;
+		padding: 10px 16px;
+		margin-left: 8px;
+		border-radius: 8px;
+		cursor: pointer;
+		font-size: 14px;
+	}
+
+	/* -----------------------------
+	   RESPONSIVE DESIGN
+	   ----------------------------- */
+
+	/* Tablet (medium screens) */
+	@media (max-width: 768px) {
+		.chat-container {
+			width: 90%;
+			height: 86vh;
+		}
+	}
+
+	/* Mobile (small screens) */
+	@media (max-width: 480px) {
+		.chat-container {
+			width: 100%;
+			height: 90vh;
+			margin: 0;
+			border-radius: 0;
+		}
+
+		.header h3 {
+			font-size: 16px;
+		}
+
+		.header button {
+			padding: 4px 10px;
+			font-size: 12px;
+		}
+
+		.input-area input {
+			font-size: 13px;
+		}
+
+		.input-area button {
+			font-size: 13px;
+			padding: 8px 12px;
+		}
+
+		.msg {
+			max-width: 85%;
+			font-size: 13px;
+		}
+	}
+</style>
+
+
+<div class="chat-container fixed]">
+	<div class="header text-white">
+		<h3>Help - ChatBot</h3>
+		<button onclick="clearChat()">Clear Chat</button>
+	</div>
+
+	<div class="messages" id="chatBox"></div>
+
+	<div class="input-area ">
+		<input id="userInput" type="text" placeholder="Type your message..." />
+		<button onclick="sendMessage()">Send</button>
+	</div>
+</div>
+
+<script>
+	const API_KEY = "AIzaSyA-inwNHwsA5Qi99YQDrZG8bpGNMlb6xK0";
+	const chatBox = document.getElementById("chatBox");
+	const userInput = document.getElementById("userInput");
+
+	let messages = JSON.parse(localStorage.getItem("chatHistory")) || [
+		{ role: "bot", content: "Hi — I'm GSTify Assistant. Ask me anything related to GST billing, invoices, customers, stock, payments, deployment, or errors!" }
+	];
+
+	// Display existing chat
+	messages.forEach(addMessageToUI);
+	scrollToBottom();
+
+	function addMessageToUI(msg) {
+		let div = document.createElement("div");
+		div.className = `msg ${msg.role}`;
+		div.textContent = msg.content;
+		chatBox.appendChild(div);
+		scrollToBottom();
+	}
+
+	function saveChat() {
+		localStorage.setItem("chatHistory", JSON.stringify(messages));
+	}
+
+	function clearChat() {
+		messages = [{ role: "bot", content: "Hi — I'm GSTify Assistant. Ask me anything!" }];
+		chatBox.innerHTML = "";
+		messages.forEach(addMessageToUI);
+		localStorage.removeItem("chatHistory");
+	}
+
+	// ------------ TRAINING DATA (your full documentation compressed) --------------
+	const systemTrainingData = `
+You are GSTify Expert — a highly trained assistant for GST Billing System.
+You ALWAYS answer about:
+- GST invoice creation, PDF, print, numbering, templates
+- Inventory, stock, product management
+- Customer bookkeeping, ledgers, payments, dues
+- GST rates: 5%, 12%, 18%, 28%, CGST/SGST/IGST
+- HSN code lookup
+- Sales, purchase reports, tax reports
+- Django issues: migrations, static files, templates, views, login errors
+- Deployment: gunicorn, nginx, HTTPS
+- Database: SQLite, PostgreSQL, backup/restore
+- Billing logic: discount, rounding, num2words, totals, calculations
+- Role: admin, user, permissions
+- CSV/Excel/PDF export
+- Authentication, Google OAuth, sessions
+
+RULES:
+1. If the question is NOT related to GSTify, reply:
+   "I only answer GSTify-related queries such as billing, stock, invoice, customer, GST, tax, Django setup & deployment."
+2. Give short, direct, professional answers.
+3. Provide steps, code snippets, or settings if needed.
+4. Always assume user is using Django-based GSTify project.
+	`;
+
+	const allowedKeywords = [
+		"gst", "GST", "gstin", "invoice", "bill", "billing", "customer", "stock",
+		"inventory", "product", "hsn", "tax", "cgst", "sgst", "igst",
+		"ledger", "payment", "due", "report", "sales", "purchase",
+		"csv", "num2words", "rounding", "login", "auth",
+	];
+
+	function isRelatedToProject(text) {
+		return allowedKeywords.some(k => text.toLowerCase().includes(k));
+	}
+
+	async function sendMessage() {
+		const text = userInput.value.trim();
+		if (!text) return;
+
+		const userMsg = { role: "user", content: text };
+		messages.push(userMsg);
+		addMessageToUI(userMsg);
+		userInput.value = "";
+
+		const loadingMsg = { role: "bot", content: "Thinking..." };
+		messages.push(loadingMsg);
+		addMessageToUI(loadingMsg);
+
+		let finalPrompt = "";
+
+		if (isRelatedToProject(text)) {
+			finalPrompt = systemTrainingData + "\nUser: " + text;
+		} else {
+			finalPrompt = `
+I only answer GSTify-related queries such as:
+- GST billing
+- Invoice generation
+- Stock & inventory
+- Django project setup
+- Deployment
+- Customer ledger
+Ask something related to GSTify.
+User: ${text}
+			`;
+		}
+
+		try {
+			const res = await fetch(
+				`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`,
+				{
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						contents: [{ parts: [{ text: finalPrompt }] }]
+					})
+				}
+			);
+
+			const data = await res.json();
+
+			const reply =
+				data?.candidates?.[0]?.content?.parts?.[0]?.text ||
+				"Sorry, I didn't understand that.";
+
+			// Remove loading
+			messages.pop();
+			chatBox.removeChild(chatBox.lastChild);
+
+			const botMsg = { role: "bot", content: reply };
+			messages.push(botMsg);
+			addMessageToUI(botMsg);
+
+			saveChat();
+		} catch (err) {
+			messages.pop();
+			chatBox.removeChild(chatBox.lastChild);
+
+			const errorMsg = { role: "bot", content: `Error: ${err.message}` };
+			messages.push(errorMsg);
+			addMessageToUI(errorMsg);
+		}
+	}
+
+	userInput.addEventListener("keydown", (e) => {
+		if (e.key === "Enter") sendMessage();
+	});
+
+	function scrollToBottom() {
+		chatBox.scrollTop = chatBox.scrollHeight;
+	}
+</script>
+
+{% endblock %}
+

@@ -1,0 +1,531 @@
+/* ============================================
+   GLOBAL STYLES & MODERN UI ENHANCEMENTS
+   ============================================ */
+
+:root {
+	--primary-color: #2c3e50;
+	--secondary-color: #3498db;
+	--success-color: #27ae60;
+	--danger-color: #e74c3c;
+	--warning-color: #f39c12;
+	--info-color: #17a2b8;
+	--light-bg: #f8f9fa;
+	--border-radius: 8px;
+	--transition: all 0.3s ease;
+	--shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	--shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+body {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+	background-color: #f5f7fa;
+	color: #333;
+	line-height: 1.6;
+}
+
+/* Smooth scrolling */
+html {
+	scroll-behavior: smooth;
+}
+
+/* Enhanced Input Fields */
+input.form-control {
+	border-radius: var(--border-radius);
+	padding: 0.5em 0.75em;
+	font-size: 0.9em;
+	border: 1px solid #ddd;
+	transition: var(--transition);
+	background-color: #fff;
+}
+
+input.form-control:focus {
+	border-color: var(--secondary-color);
+	box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+	outline: none;
+	background-color: #fff;
+}
+
+input.form-control:hover {
+	border-color: #bbb;
+}
+
+/*Invoice Page *******************************************/
+
+#invoice-form input{
+	font-size: 0.9em;
+	color: black;
+}
+
+#invoice-form-items-table {
+	font-size: 0.8em;
+}
+
+input.form-control[type=number] {
+	-moz-appearance: none;
+	-webkit-appearance: textfield;
+}
+
+.table-bordered td.form-input-td {
+	padding: 0;
+	vertical-align: middle;
+}
+
+/* Enhanced Tables */
+.table-bordered td, .table-bordered th {
+	padding: 0.75em;
+	transition: var(--transition);
+}
+
+.table-bordered tbody td, .table-bordered tbody th, .table-bordered thead th, .table-bordered thead td {
+	background: #ffffff;
+}
+
+.table-bordered thead th {
+	background: var(--primary-color);
+	color: white;
+	font-weight: 600;
+	text-transform: uppercase;
+	font-size: 0.85em;
+	letter-spacing: 0.5px;
+}
+
+.table-bordered tbody tr {
+	transition: var(--transition);
+}
+
+.table-bordered tbody tr:hover {
+	background-color: #f0f4f8;
+	transform: translateY(-1px);
+	box-shadow: var(--shadow);
+}
+
+.table {
+	border-radius: var(--border-radius);
+	overflow: hidden;
+	box-shadow: var(--shadow);
+}
+
+.two-col-form td, .two-col-form th { 
+	width: 25%;
+}
+
+
+#customer_search_bar, #product_search_bar {
+	display: none;
+	background: #f9f9f9;
+	width: 20em;
+	height: 100%;
+	position: absolute;
+	right: 0;
+	top: 0;
+	box-shadow: 0em 0em 1em #111;
+	padding: 0.2em;
+}
+
+.customer-search-result, .product-search-result {
+	padding: 0.2em;
+	margin: 0.4em;
+	border-bottom: 0.16em solid #b9b9b9;
+	cursor: pointer;
+}
+
+.customer-search-result:hover, .product-search-result:hover {
+	background: #b9b9b9;
+}
+
+
+[readonly] {
+   caret-color: transparent;
+   transition: none;
+   border: none;
+}
+
+[readonly]:focus {
+   caret-color: transparent;
+   box-shadow: none;
+   border: none;
+   
+}
+.table-invoice td, .table-invoice th {
+	border: solid #dee2e6 1px;
+}
+
+.table-invoice td, .table-invoice th {
+    padding: .25rem;
+}
+
+#table-invoice-total-row {
+	border-top: 2px solid #939393;
+	background: white;
+}
+
+#invoice-grand-total-table td {
+	font-weight: bold;
+	padding: .25rem;
+}
+
+
+#invoice-signature-text-row {
+    border-top: 2px solid;
+}
+
+#invoice-signature-row {
+	border-bottom: 2px solid;
+	height: 4em;
+}
+
+
+
+
+/* Enhanced Buttons */
+.btn {
+	border-radius: var(--border-radius);
+	padding: 0.5em 1.2em;
+	font-weight: 500;
+	transition: var(--transition);
+	border: none;
+	box-shadow: var(--shadow);
+}
+
+.btn:hover {
+	transform: translateY(-2px);
+	box-shadow: var(--shadow-hover);
+}
+
+.btn:active {
+	transform: translateY(0);
+}
+
+.btn-primary {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.btn-primary:hover {
+	background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.btn-danger {
+	background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.btn-danger:hover {
+	background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+}
+
+.btn-dark {
+	background: linear-gradient(135deg, #434343 0%, #000000 100%);
+}
+
+.btn-dark:hover {
+	background: linear-gradient(135deg, #000000 0%, #434343 100%);
+}
+
+.btn-success {
+	background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+
+.btn-success:hover {
+	background: linear-gradient(135deg, #38ef7d 0%, #11998e 100%);
+}
+
+.btn-outline-primary {
+	border: 2px solid var(--secondary-color);
+	color: var(--secondary-color);
+	background: transparent;
+}
+
+.btn-outline-primary:hover {
+	background: var(--secondary-color);
+	color: white;
+}
+
+/*Customer and Product Page ************************/
+
+#add_customer_btn, #add_product_btn {
+	float: right;
+	margin-bottom: 1em;
+}
+
+/* Inventory Page */
+#inventory-table tr, #book-table tr, #invoice-table tr, #customer-table tr, #product-table tr {
+	transition: var(--transition);
+}
+
+#inventory-table tr:hover, #book-table tr:hover, #invoice-table tr:hover, 
+#customer-table tr:hover, #product-table tr:hover {
+	cursor: pointer;
+	background-color: #f0f4f8;
+	transform: scale(1.01);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+#invoice_profile_data {
+	white-space: pre-line;
+}
+
+/* Print invoice page ************************************/
+
+@page
+{
+    size: auto;   /* auto is the initial value */ 
+
+    /* this affects the margin in the printer settings */ 
+    margin: 5mm 5mm 5mm 5mm;  
+}
+
+
+/* Enhanced Cards */
+.card {
+	border-radius: var(--border-radius);
+	box-shadow: var(--shadow);
+	border: none;
+	transition: var(--transition);
+	overflow: hidden;
+}
+
+.card:hover {
+	box-shadow: var(--shadow-hover);
+	transform: translateY(-2px);
+}
+
+.card-header {
+	background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+	color: white;
+	font-weight: 600;
+	border: none;
+	padding: 1em;
+}
+
+.card-body {
+	padding: 1.5em;
+}
+
+/* Enhanced Navbar */
+.navbar {
+	box-shadow: var(--shadow);
+	border-radius: 0 0 var(--border-radius) var(--border-radius);
+	margin-bottom: 2em;
+	padding: 0.75em 1em;
+}
+
+.navbar-brand {
+	font-size: 1.5em;
+	font-weight: 700;
+	letter-spacing: 0.5px;
+	transition: var(--transition);
+}
+
+.navbar-brand:hover {
+	transform: scale(1.05);
+}
+
+.navbar-brand i {
+	margin-right: 0.5em;
+	color: #3498db;
+}
+
+.nav-link {
+	padding: 0.5em 1em !important;
+	border-radius: var(--border-radius);
+	margin: 0 0.25em;
+	transition: var(--transition);
+}
+
+.nav-link:hover {
+	background-color: rgba(255, 255, 255, 0.1);
+	transform: translateX(5px);
+}
+
+.nav-link i {
+	margin-right: 0.5em;
+}
+
+/* Enhanced Jumbotron */
+.jumbotron {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	color: white;
+	border-radius: var(--border-radius);
+	padding: 3em 2em;
+	box-shadow: var(--shadow);
+	margin-bottom: 2em;
+}
+
+.jumbotron h1, .jumbotron h2 {
+	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.jumbotron .btn {
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Enhanced Landing Page Cards */
+.card.text-white.bg-primary {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+	border-radius: var(--border-radius);
+	transition: var(--transition);
+	overflow: hidden;
+}
+
+.card.text-white.bg-primary:hover {
+	transform: translateY(-5px) scale(1.02);
+	box-shadow: var(--shadow-hover);
+}
+
+.card.text-white.bg-primary .card-body {
+	padding: 1.5em;
+}
+
+.card.text-white.bg-primary .card-title {
+	font-weight: 600;
+	margin-bottom: 1em;
+}
+
+/* Enhanced Modals */
+.modal-content {
+	border-radius: var(--border-radius);
+	border: none;
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+	background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+	color: white;
+	border-radius: var(--border-radius) var(--border-radius) 0 0;
+	padding: 1em 1.5em;
+}
+
+.modal-header .close {
+	color: white;
+	opacity: 0.9;
+	text-shadow: none;
+}
+
+.modal-header .close:hover {
+	opacity: 1;
+}
+
+.modal-body {
+	padding: 1.5em;
+}
+
+.modal-footer {
+	border-top: 1px solid #e9ecef;
+	padding: 1em 1.5em;
+}
+
+/* Enhanced Forms */
+.form-group {
+	margin-bottom: 1.5em;
+}
+
+.form-control {
+	transition: var(--transition);
+}
+
+.form-control:focus {
+	border-color: var(--secondary-color);
+	box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+}
+
+/* Page Headings */
+h2 {
+	color: var(--primary-color);
+	font-weight: 600;
+	margin-bottom: 1.5em;
+	margin-top: 0.5em;
+	padding-bottom: 0.5em;
+	border-bottom: 3px solid var(--secondary-color);
+	display: inline-block;
+}
+
+h2 i {
+	color: var(--secondary-color);
+	margin-right: 0.5em;
+}
+
+/* Container Improvements */
+.container {
+	max-width: 1200px;
+	padding: 2em 1em;
+	background-color: #ffffff;
+	border-radius: var(--border-radius);
+	box-shadow: var(--shadow);
+	margin-top: 1em;
+	margin-bottom: 2em;
+}
+
+/* Alert Improvements */
+.alert {
+	border-radius: var(--border-radius);
+	border: none;
+	box-shadow: var(--shadow);
+	margin-bottom: 1.5em;
+	padding: 1em 1.5em;
+}
+
+.alert-success {
+	background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+	color: #155724;
+}
+
+.alert-danger {
+	background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+	color: #721c24;
+}
+
+/* Login Page ******************************************/
+#login-card {
+	margin-top: 5em;
+	text-align: center;
+	max-width: 450px;
+	margin-left: auto;
+	margin-right: auto;
+	box-shadow: var(--shadow-hover);
+}
+
+#login-card .card-header {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	font-size: 1.5em;
+}
+
+#login-card .card-title {
+	color: var(--primary-color);
+	margin-bottom: 1.5em;
+}
+
+/* Responsive Improvements */
+@media (max-width: 768px) {
+	.navbar-nav {
+		margin-top: 1em;
+	}
+	
+	.nav-link {
+		padding: 0.75em 1em !important;
+		margin: 0.25em 0;
+	}
+	
+	.jumbotron {
+		padding: 2em 1em;
+	}
+	
+	.container {
+		padding: 1em;
+	}
+	
+	.card {
+		margin-bottom: 1em;
+	}
+}
+
+/* Print Styles */
+@media print {
+	.navbar, .btn, .d-print-none {
+		display: none !important;
+	}
+	
+	.card {
+		box-shadow: none;
+		border: 1px solid #ddd;
+	}
+}

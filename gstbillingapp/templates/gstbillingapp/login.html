@@ -1,0 +1,52 @@
+{% extends "gstbillingapp/base.html" %}
+
+{% load static %}
+
+
+
+{% block content %}
+<div class="row">
+<div class="col-sm">
+</div>
+<div class="col-sm">
+	<div class="card" id="login-card">
+		<h5 class="card-header"><i class="fas fa-sign-in-alt"></i> Login to GSTify</h5>
+		<div class="card-body">
+			<h5 class="card-title"><i class="fas fa-receipt"></i> Login and start billing now!</h5>
+			<p class="card-text text-muted">Access your invoices, inventory, and more</p>
+			<!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
+			<!--a href="{% url "social:begin" "google-oauth2" %}" class="btn btn-primary">Login with Google</a-->
+		</div>
+		<div class="text-center my-3">
+			<hr>
+			<span class="text-muted">OR</span>
+			<hr>
+		</div>
+		<form method="POST">
+			{% csrf_token %}
+			<table class="table">
+				<tbody class="two-col-form">
+					<tr>
+						<th scope="row" class="text-right">Username:</th>
+						<td class="form-input-td">{{auth_form.username}}</td>
+					</tr>`
+					<tr>
+						<th scope="row" class="text-right">Password:</th>
+						<td class="form-input-td">{{auth_form.password}}</td>
+					</tr>
+				</tbody>
+			</table>
+		
+			<input type="submit" class="btn btn-primary btn-block" value="Login">
+		</form>
+
+		<div class="text-center mt-3">
+			<p class="text-muted">Don't have an account?</p>
+			<a href="{% url 'signup_view' %}" class="btn btn-outline-primary btn-block"><i class="fas fa-user-plus"></i> Sign Up</a>
+		</div>
+	</div>
+	</div>
+<div class="col-sm">
+</div>
+</div>
+{% endblock %}

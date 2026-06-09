@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<a class="navbar-brand" href="{% url 'landing_page' %}"><i class="fas fa-receipt"></i> GSTify</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+			{% if user.is_authenticated %}
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'invoice_create' %}"><i class="fas fa-plus-circle"></i> New Invoice <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'invoices' %}"><i class="fas fa-file-invoice"></i> Invoices</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'inventory' %}"><i class="fas fa-boxes"></i> Inventory</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'books' %}"><i class="fas fa-book"></i> Books</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'customers' %}"><i class="fas fa-users"></i> Customers</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'products' %}"><i class="fas fa-cube"></i> Products</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'user_profile' %}"><i class="fas fa-user-circle"></i> Profile</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'chatbot' %}"><i class="fas fa-robot"></i> ChatBot</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'logout' %}?next=/"><i class="fas fa-sign-out-alt"></i> Logout</a>
+			</li>
+			{% endif %}
+		</ul>
+	</div>
+</nav>

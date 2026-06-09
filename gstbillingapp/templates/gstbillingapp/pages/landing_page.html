@@ -1,0 +1,96 @@
+{% extends "gstbillingapp/base.html" %}
+
+
+{% load static %}
+<!doctype html>
+
+{% block title %}
+GSTify - Invoice Inventory Management
+{% endblock %}
+
+{% block metatags %}
+<meta name="description" content="Create GST invoice/bills for free. Automatic inventory Management and Books management.">
+<meta name="google-site-verification" content="MJbX1a9Fs1MIE1tnpRnp4At9OzVMxoumTAvOWUlG8-w" />
+<link rel="canonical" href="https://gstbills.in/" />
+
+<meta property="og:title" content="GSTify - Simplest GST invoicing | Inventory Management | Book keeping" />
+<meta property="og:url" content="https://gstbills.in" />
+<meta property="og:image" content="https://gstbills.in{% static "gstbillingapp/images/screenshot_interface.png" %}" />
+{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron">
+	<h1 class="display-4">GSTify - Invoice, Inventory Management</h1>
+	<h2 class="display-6">Simplest <b>GST invoicing</b> app.</h2>
+	<hr class="my-4">
+	<h4>
+	<ul style="list-style: none; padding-left: 0;">
+		 <li><i class="fas fa-check-circle" style="color: #2ecc71; margin-right: 0.5em;"></i> Easily create invoices</li>
+		 <li><i class="fas fa-check-circle" style="color: #2ecc71; margin-right: 0.5em;"></i> Manage inventory</li>
+		 <li><i class="fas fa-check-circle" style="color: #2ecc71; margin-right: 0.5em;"></i> Keep books and track balances</li>
+		 <li><i class="fas fa-check-circle" style="color: #2ecc71; margin-right: 0.5em;"></i> Ask a question to the chatbot</li>
+	</ul>
+	</h4>
+	<p class="lead">
+		<a class="btn btn-primary btn-lg" href="{% url 'invoice_create' %}" role="button"><i class="fas fa-plus-circle"></i> Create Invoice</a>
+	</p>
+</div>
+
+<div class="row">
+	<div class="col d-flex align-items-stretch">
+		<div class="card text-white bg-primary mb-3">
+			<div class="card-body">
+			<h4 class="card-title"><i class="fas fa-desktop"></i> Simple Interface</h4>
+			<img class="img-fluid" src="{% static "gstbillingapp/images/CreateInvoice.png" %}" alt="Simple Interface" style="border-radius: 8px; margin-top: 1em;">
+			</div>
+		</div>
+	</div>
+	<div class="col d-flex align-items-stretch">
+		<div class="card text-white bg-primary mb-3">
+			<div class="card-body">
+			<h4 class="card-title"><i class="fas fa-search"></i> Dashboard</h4>
+			<img class="img-fluid" src="{% static "gstbillingapp/images/DashBoard.png" %}" alt="Dashboard" style="border-radius: 8px; margin-top: 1em;">
+			</div>
+		</div>
+	</div>
+<!-- 	<div class="col d-flex align-items-stretch">
+		<div class="card text-white bg-primary mb-3">
+			<div class="card-body">
+			<h4 class="card-title">Printable Invoices</h4>
+			<ul>
+				<li><h5>Clean Invoice Format</h5></li>
+			</ul>
+			<ul>
+				<li><h5>Print Invoices directly with one click.</h5></li>
+			</ul>
+			<ul>
+				<li><h5>Save Invoices as PDF</h5></li>
+			</ul>
+			</div>
+		</div>
+	</div>
+ -->
+ 	<div class="col d-flex align-items-stretch">
+		<div class="card text-white bg-primary mb-3">
+			<div class="card-body">
+			<h4 class="card-title"><i class="fas fa-book-open"></i> Profile Page</h4>
+			<img class="img-fluid" src="{% static "gstbillingapp/images/profile.png" %}" alt="Manage books and balances" style="border-radius: 8px; margin-top: 1em;">
+			</div>
+		</div>
+	</div>
+
+	 <div class="col d-flex align-items-stretch">
+		<div class="card text-white bg-primary mb-3">
+			<div class="card-body">
+			<h4 class="card-title"><i class="fas fa-warehouse"></i> Bill Management & Printing</h4>
+			<img class="img-fluid" src="{% static "gstbillingapp/images/Billprintpage.png" %}" alt="Manage inventory easily" style="border-radius: 8px; margin-top: 1em;">
+			</div>
+		</div>
+	</div>
+</div>
+
+
+</div>
+
+{% endblock %}
