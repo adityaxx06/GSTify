@@ -56,6 +56,7 @@ The project is built using Python, Django, SQLite, Bootstrap, JavaScript, and jQ
 * CGST calculation
 * SGST calculation
 * IGST calculation
+* With GST and Without GST option
 * Tax summary generation
 
 ### User Experience
